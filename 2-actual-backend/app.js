@@ -38,10 +38,13 @@ app.post("/items", async (req, res) => {
   res.status(201).json({ message: "Stored new item.", item: newItem });
 });
 
-app.listen(8080);
+// For local development
+if (process.env.NODE_ENV !== "production") {
+  app.listen(8080, () => {
+    console.log("Server running on port 8080");
+  });
+}
 
-// At the end of your app.js file, add:
+// For Vercel deployment
+
 module.exports = app;
-// Or if you have app.listen(), replace it with:
-// module.exports = app;
-// app.listen(process.env.PORT || 5000); // Keep this for local development
